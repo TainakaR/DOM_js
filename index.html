@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScriptで魅せる！ローディングアニメーションデザイン</title>
+    <link rel="stylesheet" href="main.css"> </head>
+<body>
+    <header class="site-header">
+        <h1>JavaScriptで実現！動的なローディング画面のデザインアイデア</h1>
+        <p>ユーザーを飽きさせない、DOM操作によるインタラクティブなローディングアニメーションの作り方をご紹介します。</p>
+    </header>
+
+    <main class="main-content">
+        <section class="section-intro">
+            <h2 class="section-title">はじめに：なぜローディング画面が重要なのか？</h2>
+            <div class="text-content">
+                <p>Webサイトやアプリケーションの読み込み中、ユーザーは何も操作できない状態になります。この間にただ真っ白な画面を表示するだけでは、ユーザーは離脱してしまう可能性があります。そこで重要になるのが、ローディング画面です。</p>
+                <p>ローディング画面は、読み込み中の待ち時間を視覚的に埋めるだけでなく、ユーザーに「コンテンツが準備されている」という安心感を与え、期待感を高める役割も果たします。</p>
+            </div>
+        </section>
+
+        <section class="section-design-principles">
+            <h2 class="section-title">JavaScriptとDOM操作によるアニメーションの基本原則</h2>
+            <div class="text-content">
+                <ul class="bullet-list">
+                    <li><strong class="list-item-title">DOM要素の動的な生成・操作:</strong> JavaScriptでHTML要素を作成、追加、削除、属性変更などを行い、アニメーションの基盤を築きます。</li>
+                    <li><strong class="list-item-title">CSSプロパティの制御:</strong> JavaScriptから要素のスタイル（`transform`, `opacity`, `left`, `top`など）を直接変更することで、動きを作り出します。</li>
+                    <li><strong class="list-item-title">アニメーション関数の活用:</strong> `requestAnimationFrame`や`setTimeout`, `setInterval`などを使用して、滑らかなアニメーションループを実装します。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section-example">
+            <h2 class="section-title">実践例：シンプルなプログレスバーアニメーション</h2>
+            <div class="description-text">
+                <p>JavaScriptを使って、読み込みの進行状況を示すプログレスバーを動的に生成し、アニメーションさせる例を見ていきましょう。</p>
+            </div>
+            <div class="code-example">
+                <h3 class="code-heading">HTMLコード</h3>
+                <pre><code class="html-code">&lt;div id="progress-container"&gt;&lt;/div&gt;</code></pre>
+
+                <h3 class="code-heading">JavaScriptコード</h3>
+                <pre><code class="javascript-code">document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('progress-container');
+    const progressBar = document.createElement('div');
+    progressBar.id = 'my-progress-bar';
+    progressBar.style.width = '0%';
+    progressBar.style.height = '10px';
+    progressBar.style.backgroundColor = '#4CAF50';
+    progressBar.style.transition = 'width 2s linear'; // CSSはmain.cssで設定することも可能
+
+    container.appendChild(progressBar);
+
+    // 仮のローディング進行状況をシミュレート
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 10;
+        if (progress <= 100) {
+            progressBar.style.width = progress + '%';
+        } else {
+            clearInterval(interval);
+            // ローディング完了後、プログレスバーを非表示にするなどの処理
+            // 例: setTimeout(() => container.style.display = 'none', 500);
+        }
+    }, 200);
+});</code></pre>
+            </div>
+            <div class="execution-example">
+                <h3 class="example-heading">実行例</h3>
+                <p>以下のボタンをクリックすると、JavaScriptによって生成・制御されるプログレスバーの例を確認できます。</p>
+                <button id="startProgressBarBtn" class="action-button">プログレスバーを開始</button>
+                <div id="exampleProgressBarContainer" class="progress-bar-display-area">
+                    </div>
+            </div>
+        </section>
+
+        <section class="section-advanced-example">
+            <h2 class="section-title">JavaScriptで実現するその他のアニメーションアイデア</h2>
+            <div class="description-text">
+                <p>JavaScriptとDOM操作を組み合わせることで、以下のような様々なローディングアニメーションを作成できます。</p>
+            </div>
+            <div class="text-content">
+                <ul class="bullet-list">
+                    <li><strong class="list-item-title">円形プログレス:</strong> SVG要素をJavaScriptで操作し、円形の進捗表示を実現します。</li>
+                    <li><strong class="list-item-title">文字アニメーション:</strong> テキストを一文字ずつ表示したり、フェードインさせたりするアニメーションです。</li>
+                    <li><strong class="list-item-title">シェイプアニメーション:</strong> 図形の色や形を変化させながら、動きのあるローディング画面を構築します。</li>
+                    <li><strong class="list-item-title">パーティクルエフェクト:</strong> 多数の小さな要素を動的に生成・制御し、魅力的な視覚効果を生み出します。</li>
+                </ul>
+            </div>
+            <div class="execution-example">
+                <h3 class="example-heading">例（デモンストレーションは省略）</h3>
+                <p>これらの高度なアニメーションは、ユーザー体験を豊かにし、サイトの個性を際立たせます。JavaScriptの力を最大限に活用して、無限の可能性を探ってみましょう。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 JS Loading Animation Design. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('startProgressBarBtn').addEventListener('click', () => {
+            const displayArea = document.getElementById('exampleProgressBarContainer');
+            displayArea.innerHTML = ''; // 既存のものをクリア
+
+            const progressBar = document.createElement('div');
+            progressBar.className = 'js-controlled-progress-bar'; // main.cssでスタイルを定義
+            progressBar.style.width = '0%';
+            displayArea.appendChild(progressBar);
+
+            let progress = 0;
+            const animationDuration = 2000; // アニメーションの総時間（ミリ秒）
+            const steps = 100; // 分割するステップ数
+            const delay = animationDuration / steps;
+
+            const animateProgress = () => {
+                if (progress < steps) {
+                    progress++;
+                    progressBar.style.width = (progress / steps) * 100 + '%';
+                    requestAnimationFrame(animateProgress);
+                } else {
+                    // アニメーション完了後の処理
+                    setTimeout(() => {
+                        displayArea.innerHTML = '<p>ロード完了！</p>';
+                    }, 300); // 完了メッセージ表示までのわずかな遅延
+                }
+            };
+
+            // アニメーション開始
+            requestAnimationFrame(animateProgress);
+        });
+    </script>
+</body>
+</html>

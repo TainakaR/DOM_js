@@ -1,0 +1,217 @@
+/* 基本的なリセットとフォント設定 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* サイト全体のヘッダー */
+.site-header {
+    background-color: #2c3e50; /* ダークネイビー */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 2.2em;
+}
+
+.site-header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* メインコンテンツエリア */
+.main-content {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 各セクションのスタイル */
+section {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+section:last-of-type {
+    border-bottom: none; /* 最後のセクションの下線は不要 */
+}
+
+.section-title {
+    color: #2980b9; /* ブルー */
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    border-left: 5px solid #2980b9;
+    padding-left: 10px;
+}
+
+/* テキストコンテンツ */
+.text-content p,
+.description-text p {
+    margin-bottom: 1em;
+}
+
+/* 箇条書きリスト */
+.bullet-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.bullet-list li {
+    margin-bottom: 0.5em;
+}
+
+.list-item-title {
+    color: #34495e; /* ダークグレー */
+}
+
+/* コードブロック */
+.code-example {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.code-heading {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-top: 0;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+pre {
+    background-color: #eef;
+    padding: 10px;
+    border-radius: 3px;
+    overflow-x: auto; /* 横スクロールが必要な場合に表示 */
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    color: #007bff; /* 青 */
+}
+
+.css-code {
+    color: #d63384; /* ピンク */
+}
+
+.javascript-code {
+    color: #dc3545; /* 赤 */
+}
+
+/* 実行例エリア */
+.execution-example {
+    background-color: #e8f5e9; /* 薄い緑 */
+    border: 1px solid #c8e6c9;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.example-heading {
+    color: #1b5e20; /* 濃い緑 */
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+/* アクションボタン */
+.action-button {
+    background-color: #28a745; /* グリーン */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #218838; /* ホバーで少し濃いグリーン */
+}
+
+/* プログレスバー表示エリア */
+.progress-bar-display-area {
+    margin-top: 20px;
+    background-color: #ddd;
+    height: 15px;
+    border-radius: 5px;
+    overflow: hidden; /* 子要素がはみ出さないように */
+    position: relative; /* 子要素の配置のため */
+}
+
+/* JavaScriptで生成・制御されるプログレスバーの本体 */
+.js-controlled-progress-bar {
+    height: 100%;
+    background-color: #4CAF50; /* 緑色 */
+    width: 0%; /* JSで制御される初期値 */
+    transition: width 0.1s linear; /* 滑らかなアニメーション */
+    border-radius: 5px;
+}
+
+/* サイト全体のフッター */
+.site-footer {
+    background-color: #34495e; /* ダークグレー */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    font-size: 0.9em;
+}
+
+/* レスポンシブデザインの基本的なブレークポイント */
+@media (max-width: 768px) {
+    .main-content {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .site-header h1 {
+        font-size: 1.8em;
+    }
+
+    .site-header p {
+        font-size: 1em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .action-button {
+        width: 100%;
+        box-sizing: border-box; /* paddingとborderをwidthに含める */
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 1.5em;
+    }
+
+    .section-title {
+        font-size: 1.3em;
+    }
+
+    .code-example, .execution-example {
+        padding: 10px;
+    }
+}
