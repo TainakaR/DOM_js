@@ -77,23 +77,6 @@ section:last-of-type {
     color: #34495e; /* ダークグレー */
 }
 
-/* コードブロック */
-.code-example {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 20px;
-}
-
-.code-heading {
-    color: #2c3e50;
-    font-size: 1.3em;
-    margin-top: 0;
-    border-bottom: 1px dashed #eee;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
 
 pre {
     background-color: #eef;
@@ -108,64 +91,6 @@ code {
     color: #007bff; /* 青 */
 }
 
-.css-code {
-    color: #d63384; /* ピンク */
-}
-
-.javascript-code {
-    color: #dc3545; /* 赤 */
-}
-
-/* 実行例エリア */
-.execution-example {
-    background-color: #e8f5e9; /* 薄い緑 */
-    border: 1px solid #c8e6c9;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.example-heading {
-    color: #1b5e20; /* 濃い緑 */
-    font-size: 1.5em;
-    margin-top: 0;
-}
-
-/* アクションボタン */
-.action-button {
-    background-color: #28a745; /* グリーン */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-.action-button:hover {
-    background-color: #218838; /* ホバーで少し濃いグリーン */
-}
-
-/* プログレスバー表示エリア */
-.progress-bar-display-area {
-    margin-top: 20px;
-    background-color: #ddd;
-    height: 15px;
-    border-radius: 5px;
-    overflow: hidden; /* 子要素がはみ出さないように */
-    position: relative; /* 子要素の配置のため */
-}
-
-/* JavaScriptで生成・制御されるプログレスバーの本体 */
-.js-controlled-progress-bar {
-    height: 100%;
-    background-color: #4CAF50; /* 緑色 */
-    width: 0%; /* JSで制御される初期値 */
-    transition: width 0.1s linear; /* 滑らかなアニメーション */
-    border-radius: 5px;
-}
 
 /* サイト全体のフッター */
 .site-footer {
@@ -249,7 +174,7 @@ code {
   /* 例: border-radius, overflow: hidden など */
 }
 
-#push_demo_form {
+#push_demo_4 {
   display: flex; /* Flexboxコンテナにする */
   justify-content: center; /* 主軸（横方向）で子要素を中央に配置 */
   align-items: center; /* 交差軸（縦方向）で子要素を中央に配置（必要であれば） */
@@ -262,6 +187,7 @@ code {
     color: #abb2bf; /* コードの色 */
     border-radius: 8px; /* 丸角 */
     padding: 15px;
+    margin-top: 0.8em;
     margin-bottom: 20px;
     overflow-x: auto; /* 横に長いコードに対応 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 軽い影 */
@@ -324,4 +250,34 @@ code {
     .script pre {
         font-size: 0.85em;
     }
+}
+
+.box27 {
+    position: relative;
+    /* 画面幅に応じて余白を調整 */
+    margin: 2em 2vw; /* 左右の余白をvwで指定し、画面幅に合わせる */
+    padding: 0.5em 1em;
+    border: solid 3px #62c1ce;
+}
+
+.box27 .box-title {
+    position: absolute;
+    display: inline-block;
+    /* 親要素のフォントサイズに合わせる */
+    top: -1.5em; /* 27pxを相対単位に変換 (font-size: 17pxの場合) */
+    left: -3px; /* こちらは固定でも問題ないことが多いが、必要であればvwなどに */
+    padding: 0 0.5em; /* パディングも相対単位に */
+    height: 1.5em; /* 高さも相対単位に */
+    line-height: 1.5em; /* 行の高さも相対単位に */
+    /* 画面幅に応じてフォントサイズを調整 */
+    font-size: clamp(1rem, 3vw, 1.2rem); /* 最小1rem、最大1.2rem、ビューポート幅の3%で可変 */
+    background: #62c1ce;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}
+
+.box27 p {
+    margin: 0; 
+    padding: 0;
 }

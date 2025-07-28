@@ -1,17 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // フォーム要素を取得
-    const searchForm = document.getElementById("push_demo_form");
+    const searchForm = document.getElementById("push_demo_4");
 
     if (searchForm) {
         // フォームのsubmitイベントを監視
         searchForm.addEventListener("submit", function(event) {
             event.preventDefault();
+
             // レターボックス上部用のdivを作成
             const letterboxTop = document.createElement('div');
             letterboxTop.classList.add('letterbox-top');
             // 黒い四角を表示するためのスタイルを直接適用
-            letterboxTop.style.backgroundColor = 'black';
+            letterboxTop.style.backgroundColor = 'rgba(0, 0, 0, 1)';
             letterboxTop.style.position = 'fixed';
             letterboxTop.style.left = '0';
             letterboxTop.style.width = '100%';
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const letterboxBottom = document.createElement('div');
             letterboxBottom.classList.add('letterbox-bottom');
             // 黒い四角を表示するためのスタイルを直接適用
-            letterboxBottom.style.backgroundColor = 'rgba(0, 17, 68, 1)';
+            letterboxBottom.style.backgroundColor = 'rgba(0, 0, 0, 1)';
             letterboxBottom.style.position = 'fixed';
             letterboxBottom.style.left = '0';
             letterboxBottom.style.width = '100%';
@@ -32,11 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             letterboxBottom.style.zIndex = '1000'; // 他の要素より手前に表示
 
             document.body.prepend(letterboxTop);
-
-            // body要素の最後の要素としてletterboxBottomを追加
             document.body.append(letterboxBottom);
-
-            // --- ここから追加する内容 ---
 
             // 白いスクリーン用のdivを作成
             const whiteOverlay = document.createElement('div');
@@ -50,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
             whiteOverlay.style.zIndex = '999'; // レターボックスより下、他のコンテンツより上
             whiteOverlay.style.pointerEvents = 'auto'; // クリックを無効にする（デフォルトはautoですが、明示的に指定）
 
-            // overlayをbodyに追加
             document.body.appendChild(whiteOverlay);
 
             // 画像表示用のdivを作成
@@ -88,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // 0.5秒ごとに画像を切り替えるインターバルを設定
             const intervalId = setInterval(changeImage, 500);
 
+            // 5秒後に要素を削除
             setTimeout(() => {
                 clearInterval(intervalId); // 画像切り替えのインターバルを停止
                 letterboxTop.remove(); // レターボックス上部を削除
@@ -96,10 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 loadingImageContainer.remove(); // ローディング画像コンテナを削除
                 console.log("test.js: 5秒が経過し、要素が削除されました。");
             }, 5000);
-
-            console.log("test.js: レターボックス用のdivがbodyに追加されました。");
         });
     } else {
-        console.log("test.js: 'searchForm' 要素が見つかりませんでした。");
+        console.log("4.js: 'searchForm' 要素が見つかりませんでした。");
     }
 });
