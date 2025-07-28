@@ -62,6 +62,21 @@ section:last-of-type {
     margin-bottom: 1em;
 }
 
+.text-content a {
+    display: inline-block; /* インライン要素をブロック要素のように扱い、幅と高さを設定できるようにする */
+    padding: 0.1em 0.6em; /* 内側の余白 */
+    border-radius: 0.4em; /* 角の丸み */
+    background-color: #eaecf2; /* 背景色 */
+    color: #111112; /* テキストの色 */
+    text-decoration: none; /* 下線をなくす */
+    margin: 0 0.2em; /* 周囲の余白 */
+    font-weight: bold;
+}
+
+.text-content a:hover {
+    background-color: #d3d7e0; /* ホバー時の背景色 */
+}
+
 /* 箇条書きリスト */
 .bullet-list {
     list-style-type: disc;
@@ -141,37 +156,96 @@ code {
     }
 }
 
-.btn-orange-shadow { /* 共通のスタイル */
-    color: #fff;
-    background-color: #2c37ae;
-    border-bottom: 5px solid #0a1020;
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    /* ボタンらしくするための追加スタイル */
-    display: inline-block; /* インライン要素なのでブロック要素のように振る舞わせる */
-    text-decoration: none; /* リンクの下線を消す場合は不要だが、ボタンなら不要 */
-    text-align: center; /* テキストを中央に */
-    vertical-align: middle; /* 垂直方向の中央揃え */
-    cursor: pointer; /* マウスオーバー時にポインターを表示 */
-    border: none; /* デフォルトのボタンボーダーを消す */
-    padding: 1em 2em; /* パディングを調整 */
-    font-size: 1.5em; /* フォントサイズを調整 */
-    line-height: 1; /* 行の高さを調整 */
-    width: fit-content; /* ← ボタンのコンテンツに合わせた幅にする */
-    margin: 0 auto;
+/* ボタンの土台となる部分 */
+.btn-border {
+    padding: 0;
+    border: none;
+    background: transparent; /* 土台は透明に */
+    position: relative; /* 子要素を絶対配置するための基準 */
+    isolation: isolate; /* 重なり順のコンテキストを新しく作る */
+    cursor: pointer;
 }
 
-.btn-orange-shadow:hover {
-    margin-top: 0.3em;
-    color: #fff;
-    background: #0c1147;
-    border-bottom: 2px solid #0a1020;
+/* PUSH！のテキストと白い背景を作る部分 */
+.btn-border span {
+    display: block;
+    position: relative; /* 斜線の上に表示させるため */
+    z-index: 2; /* 斜線(z-index: 1)より手前に配置 */
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #000;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease-out;
 }
 
-/* btn--cubic も必要に応じて button セレクタに変更 */
-.btn--cubic {
-  /* button に適用するためのスタイル調整が必要になる場合があります */
-  /* 例: border-radius, overflow: hidden など */
+/* 下の斜線部分 */
+.btn-border::after {
+    content: '';
+    position: absolute;
+    z-index: 1; /* span(z-index: 2)より奥に配置 */
+
+    /* 位置とサイズ */
+    left: 0;
+    right: 0;
+    bottom: -6px; /* ボタン本体からの距離 */
+    height: 14px; /* 斜線部分の高さ */
+
+    /* 見た目 */
+    background-image: repeating-linear-gradient(
+        -45deg,
+        #000,
+        #000 1px,
+        transparent 2px,
+        transparent 5px
+    );
+    background-size: 7px 7px;
+    border: 2px solid #000;
+    border-top: none; /* 上の線は不要 */
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-sizing: border-box; /* borderを含めてサイズ計算 */
+    transition: all 0.2s ease-out;
+}
+
+
+/* --- アニメーション --- */
+
+/* ホバー時 */
+.btn-border:hover span {
+    transform: translateY(4px);
+}
+
+.btn-border:hover::after {
+    transform: translateY(4px);
+    bottom: -4px; /* 少し下にずらす */
+}
+
+/* クリック時（アクティブ） */
+.btn-border:active span {
+    transform: translateY(8px);
+    transition-duration: 0.1s;
+}
+
+.btn-border:active::after {
+    transform: translateY(8px);
+    bottom: -2px; /* さらに下にずらす */
+    transition-duration: 0.1s;
+}
+
+#push_demo_1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em 0; /* ボタンの上下に余白を持たせる */
+}
+
+#push_demo_2 {
+  display: flex; /* Flexboxコンテナにする */
+  justify-content: center; /* 主軸（横方向）で子要素を中央に配置 */
+  align-items: center; /* 交差軸（縦方向）で子要素を中央に配置（必要であれば） */
+  /* min-height: 100vh; */ /* 画面全体で中央に配置したい場合は、ビューポートの高さを使う */
 }
 
 #push_demo_4 {
@@ -183,12 +257,12 @@ code {
 
 /* コードブロックのコンテナ */
 .script {
-    background-color: #9095a0; /* ダーク系の背景色 */
+    background-color: #d9dde6; /* ダーク系の背景色 */
     color: #abb2bf; /* コードの色 */
     border-radius: 8px; /* 丸角 */
     padding: 15px;
     margin-top: 0.8em;
-    margin-bottom: 20px;
+    margin-bottom: 2em;
     overflow-x: auto; /* 横に長いコードに対応 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 軽い影 */
 }
@@ -258,6 +332,8 @@ code {
     margin: 2em 2vw; /* 左右の余白をvwで指定し、画面幅に合わせる */
     padding: 0.5em 1em;
     border: solid 3px #62c1ce;
+    margin-top: 3em;
+    margin-bottom: 1.5em;
 }
 
 .box27 .box-title {

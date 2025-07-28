@@ -35,42 +35,6 @@
         <div class="text-content">
             <ul class="bullet-list">
                 <li>
-                    <strong class="list-item-title">HTMLドキュメントの読み込み完了を待つ</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">document.addEventListener("DOMContentLoaded", function() { ... });</code></pre>
-                    </div>
-                    これは、HTMLドキュメントが完全に読み込まれ、解析された後に指定された関数が実行されるようにするためのイベントリスナーです。JavaScriptコードがHTML要素を操作する前に、それらの要素が存在することを保証するためによく使用されます。
-                </li>
-
-                <li>
-                    <strong class="list-item-title">特定のHTML要素の取得</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">document.getElementById("push_demo_1");</code></pre>
-                    </div>
-                    これは、指定された`id`属性（この場合は "push_demo_1"）を持つHTML要素をドキュメントから検索し、取得するためのメソッドです。フォーム要素などの特定の要素にアクセスするためによく使われます。
-                </li>
-
-                <li>
-                    <strong class="list-item-title">イベントリスナーの設定（フォーム送信時）</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">searchForm.addEventListener("submit", function(event) { ... });</code></pre>
-                    </div>
-                    これは、`searchForm`という要素（この場合はフォーム）が送信（submit）されたときに、指定された関数が実行されるようにするためのイベントリスナーです。
-                </li>
-
-                <li>
-                    <strong class="list-item-title">イベントのデフォルト動作の停止</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">event.preventDefault();</code></pre>
-                    </div>
-                    これは、イベントのデフォルトのアクション（既定の動作）をキャンセルするためのメソッドです。フォームの`submit`イベントの場合、これによりフォームが実際に送信されてページがリロードされるのを防ぎます。
-                </li>
-
-                <li>
                     <strong class="list-item-title">新しいHTML要素の作成</strong>
                     <div class="script">
                         <h3>JavaScript</h3>
@@ -125,39 +89,12 @@
                 </li>
 
                 <li>
-                    <strong class="list-item-title">HTML要素の削除</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">element.remove();</code></pre>
-                    </div>
-                    これは、HTML要素をドキュメントから削除するためのメソッドです。
-                </li>
-
-                <li>
                     <strong class="list-item-title">繰り返し処理の設定</strong>
                     <div class="script">
                         <h3>JavaScript</h3>
                         <pre class="line-numbers"><code class="language-javascript">setInterval(function, delay);</code></pre>
                     </div>
                     これは、指定された関数を一定の間隔（`delay`ミリ秒ごと）で繰り返し実行するための関数です。戻り値としてインターバルIDを返します。
-                </li>
-
-                <li>
-                    <strong class="list-item-title">繰り返し処理の停止</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">clearInterval(intervalId);</code></pre>
-                    </div>
-                    これは、`setInterval`で設定された繰り返し処理を停止するための関数です。`setInterval`が返したインターバルIDを引数として渡します。
-                </li>
-
-                <li>
-                    <strong class="list-item-title">遅延実行の設定</strong>
-                    <div class="script">
-                        <h3>JavaScript</h3>
-                        <pre class="line-numbers"><code class="language-javascript">setTimeout(function, delay);</code></pre>
-                    </div>
-                    これは、指定された関数を指定された`delay`ミリ秒後に一度だけ実行するための関数です。
                 </li>
 
                 <li>
@@ -171,7 +108,67 @@
             </ul>
         </div>
 
-        
+        <h2 class="section-title">DOM操作：①画面全体にオーバーレイを表示しよう！</h2>
+        <div class="text-content">
+            <p>まず初めに何らかの処理が開始された際に、ユーザーに『今、動いていますよ！』と明確に伝えるために、画面全体を一時的に白くするテクニックを実装します。
+            このシンプルな表示によって、ユーザーは安心して処理の完了を待つことができるようになります。<br>
+            また、この白い画面が表示されている間は、ユーザーが誤って他の要素をクリックしても影響がないように設定する方法も合わせて見ていきます。
+            とても実用的なテクニックなので、ぜひマスターしてください。<br></p>
+            <p>以下のコードは、白いオーバーレイを画面全体に表示するためのJavaScriptです。</p>
+
+            <div class="script">
+                <h3>overlay.js</h3>
+                <pre class="line-numbers"><code class="language-javascript">// 白いスクリーン用のdivを作成
+const whiteOverlay = document.createElement('div');
+
+// whiteOverlayにクラスを追加
+whiteOverlay.classList.add('white-overlay');
+
+// スタイルを直接適用
+whiteOverlay.style.position = 'fixed'; // 固定位置にする
+whiteOverlay.style.top = '0'; // 画面の上部に配置
+whiteOverlay.style.left = '0'; // 画面の左端に配置
+whiteOverlay.style.width = '100%'; // 画面全体の幅
+whiteOverlay.style.height = '100%'; // 画面全体の高さ
+whiteOverlay.style.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // 半透明の白
+whiteOverlay.style.zIndex = '999'; // コンテンツより上に表示する
+whiteOverlay.style.pointerEvents = 'auto'; // クリックを無効にする（デフォルトはautoですが、明示的に指定）
+
+document.body.appendChild(whiteOverlay); // bodyに追加</code></pre>
+
+            <form id="push_demo_1">
+                <button type="submit" class="btn btn-border">
+                    <span><strong>ローディングを体験！</strong></span>
+                </button>
+            </form>
+            </div>
+
+            <p>
+                まず、<a>const whiteOverlay = document.createElement('div');</a> の行では、
+                HTMLの div 要素が新しく作成され、それが whiteOverlay という名前の定数に格納されます。
+                この新たに作成された div 要素が、ユーザーが操作している画面全体を覆う白いスクリーンとして機能します。
+            </p>
+            <P>
+                次に、<a>whiteOverlay.classList.add('white-overlay');</a> という記述で、
+                この div 要素に <a>white-overlay</a> というCSSクラスが追加されます。
+                このクラスは、別途定義されたCSSスタイルを適用するために使用され、
+                またJavaScriptコード内で特定のオーバーレイ要素を識別する際にも役立ちます。
+            </P>
+            <p>
+                その後、複数の行で <a>whiteOverlay.style</a> プロパティを使用して、
+                このオーバーレイの視覚的なスタイルが直接適用されています。
+            </p>
+
+            <div class="box27">
+                <span class="box-title">ポイント</span>
+                <p>ここでのポイントは、JavaScriptによるDOM操作で、画面全体を覆う半透明のオーバーレイを動的に生成し、
+                    視覚的なスタイルを適用してHTMLに組み込んでいる点です。
+                    特に、<a>position: fixed</a>と<a>z-index</a>を用いて、他のコンテンツの上に固定表示させる仕組みが重要です。
+                </p>
+            </div>
+
+        </div>
+
 
         <div class="script">
             <h3>JavaScript</h3>
@@ -196,6 +193,7 @@ greet('World');</code></pre>
         <p>&copy; 2025 JS Loading Animation Design. All rights reserved.</p>
     </footer>
 
+    <script src="overlay.js"></script>
     <script src="4.js"></script>
 </body>
 </html>
