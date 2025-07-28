@@ -215,3 +215,113 @@ code {
         padding: 10px;
     }
 }
+
+.btn-orange-shadow { /* 共通のスタイル */
+    color: #fff;
+    background-color: #2c37ae;
+    border-bottom: 5px solid #0a1020;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    /* ボタンらしくするための追加スタイル */
+    display: inline-block; /* インライン要素なのでブロック要素のように振る舞わせる */
+    text-decoration: none; /* リンクの下線を消す場合は不要だが、ボタンなら不要 */
+    text-align: center; /* テキストを中央に */
+    vertical-align: middle; /* 垂直方向の中央揃え */
+    cursor: pointer; /* マウスオーバー時にポインターを表示 */
+    border: none; /* デフォルトのボタンボーダーを消す */
+    padding: 1em 2em; /* パディングを調整 */
+    font-size: 1.5em; /* フォントサイズを調整 */
+    line-height: 1; /* 行の高さを調整 */
+    width: fit-content; /* ← ボタンのコンテンツに合わせた幅にする */
+    margin: 0 auto;
+}
+
+.btn-orange-shadow:hover {
+    margin-top: 0.3em;
+    color: #fff;
+    background: #0c1147;
+    border-bottom: 2px solid #0a1020;
+}
+
+/* btn--cubic も必要に応じて button セレクタに変更 */
+.btn--cubic {
+  /* button に適用するためのスタイル調整が必要になる場合があります */
+  /* 例: border-radius, overflow: hidden など */
+}
+
+#push_demo_form {
+  display: flex; /* Flexboxコンテナにする */
+  justify-content: center; /* 主軸（横方向）で子要素を中央に配置 */
+  align-items: center; /* 交差軸（縦方向）で子要素を中央に配置（必要であれば） */
+  /* min-height: 100vh; */ /* 画面全体で中央に配置したい場合は、ビューポートの高さを使う */
+}
+
+/* コードブロックのコンテナ */
+.script {
+    background-color: #9095a0; /* ダーク系の背景色 */
+    color: #abb2bf; /* コードの色 */
+    border-radius: 8px; /* 丸角 */
+    padding: 15px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* 横に長いコードに対応 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 軽い影 */
+}
+
+/* 言語を示すhタグのスタイル */
+.script h3 {
+    color: #101f2b; /* 目を引く色 */
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #3e4451; /* 区切り線 */
+    padding-bottom: 5px;
+}
+
+/* コード自体のスタイル */
+.script pre {
+    margin: 0;
+    padding: 0;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* 等幅フォント */
+    font-size: 0.95em;
+    line-height: 1.4;
+    white-space: pre-wrap; /* 必要に応じて改行 */
+    word-wrap: break-word; /* 長い単語の折り返し */
+}
+
+.script code {
+    /* pre内でcodeタグを使う場合は、preのスタイルが適用されるため、特に指定は不要な場合が多いです */
+    /* 特定の強調をしたい場合はここに記述 */
+}
+
+/* レスポンシブデザイン対応 */
+@media (max-width: 768px) {
+    .script {
+        padding: 10px; /* 画面が狭い場合はパディングを減らす */
+        margin-bottom: 15px;
+    }
+
+    .script h3 {
+        font-size: 1em; /* フォントサイズを小さくする */
+        margin-bottom: 8px;
+    }
+
+    .script pre {
+        font-size: 0.9em; /* フォントサイズを小さくする */
+    }
+}
+
+@media (max-width: 480px) {
+    .script {
+        border-radius: 5px; /* さらに丸角を小さく */
+        padding: 8px;
+    }
+
+    .script h3 {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+
+    .script pre {
+        font-size: 0.85em;
+    }
+}
