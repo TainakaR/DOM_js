@@ -40,7 +40,7 @@
                         <h3>JavaScript</h3>
                         <pre class="line-numbers"><code class="language-javascript">document.createElement('div');</code></pre>
                     </div>
-                    これは、新しいHTML要素（この場合は`<div>`要素）をJavaScript内で作成するためのメソッドです。作成された要素はまだドキュメントには追加されていません。
+                    これは、新しいHTML要素（この場合は`div`要素）をJavaScript内で作成するためのメソッドです。作成された要素はまだドキュメントには追加されていません。
                 </li>
 
                 <li>
@@ -169,6 +169,166 @@ document.body.appendChild(whiteOverlay); // bodyに追加</code></pre>
 
         </div>
 
+        <h2 class="section-title">DOM操作：②レターボックスを追加しよう！</h2>
+        <div class="text-content">
+            <p>映画のような演出をWebに取り入れてみましょう！
+            レターボックスとは、画面の上下に黒い帯を表示することで、映像にシネマティックな印象を与える手法です。
+            これをローディング画面に応用することで、ユーザーに「特別な体験が始まる」という期待感を演出できます。<br>
+            このセクションでは、JavaScriptを使って画面の上下に黒い帯（レターボックス）を動的に追加する方法を紹介します。
+            DOM操作によって、読み込み中の画面に映画のような雰囲気を加えることができます。</p>
+
+            <div class="script">
+                <h3>letterbox.js</h3>
+                <pre class="line-numbers"><code class="language-javascript">// レターボックス上部用のdivを作成
+const letterboxTop = document.createElement('div');
+letterboxTop.classList.add('letterbox-top');
+// 黒い四角を表示するためのスタイルを直接適用
+letterboxTop.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+letterboxTop.style.position = 'fixed';
+letterboxTop.style.left = '0';
+letterboxTop.style.width = '100%';
+letterboxTop.style.height = '10vh'; // 画面の高さの"10"%
+letterboxTop.style.top = '0';
+letterboxTop.style.zIndex = '1000'; // 他の要素より手前に表示(オーバーレイより上)
+
+// レターボックス下部用のdivを作成
+const letterboxBottom = document.createElement('div');
+letterboxBottom.classList.add('letterbox-bottom');
+// 黒い四角を表示するためのスタイルを直接適用
+letterboxBottom.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+letterboxBottom.style.position = 'fixed';
+letterboxBottom.style.left = '0';
+letterboxBottom.style.width = '100%';
+letterboxBottom.style.height = '15vh'; // 画面の高さの"15"%
+letterboxBottom.style.bottom = '0';
+letterboxBottom.style.zIndex = '1000'; // 他の要素より手前に表示(オーバーレイより上)
+
+// レターボックスの要素をbodyに追加
+document.body.prepend(letterboxTop);
+document.body.append(letterboxBottom);</code></pre>
+
+            <form id="push_demo_2">
+                <button type="submit" class="btn btn-border">
+                    <span><strong>ローディングを体験！</strong></span>
+                </button>
+            </form>
+            </div>
+
+            <p>
+                まず、<a>const letterboxTop = document.createElement('div'); </a>の行では、 HTMLの div 要素が新しく作成され、
+                それが letterboxTop という名前の定数に格納されます。 
+                この要素は、画面の上部に黒い帯を表示するためのレターボックスとして機能します。
+            </p>
+            <P>
+                次に、<a>letterboxTop.classList.add('letterbox-top'); </a>によって、 この 
+                div 要素に<a>letterbox-top </a> というCSSクラスが追加されます。 
+                このクラスは、スタイルの適用や要素の識別に使用されます。
+            </P>
+            <p>
+                その後、<a>letterboxTop.style</a> を使って、背景色や位置、サイズなどのスタイルを直接設定しています。 
+                特に<a> position: fixed </a>によって、スクロールしても常に画面上部に表示されるようになっています。
+            </p>
+            <p>
+                同様に、<a>const letterboxBottom = document.createElement('div');</a> によって、 下部用のレターボックス要素が作成され、<a>letterbox-bottom</a> クラスが追加されます。
+                <a>bottom: 0</a> によって画面の下端に固定表示され、<a>height: 15vh</a> によって高さが画面の15%に設定されています。
+            </p>
+            <p>
+                最後に、<a>document.body.prepend(letterboxTop); と document.body.append(letterboxBottom); </a>によって、 
+                それぞれのレターボックス要素がHTMLの<a> body </a>に追加され、画面の上下に黒い帯が表示されるようになります。
+            </p>
+
+
+            <div class="box27">
+                <span class="box-title">ポイント</span>
+                <p>ここでのポイントは、JavaScriptによるDOM操作で、画面の上下に黒い帯（レターボックス）を動的に生成し、 
+                    映画のような演出をWeb上で再現している点です。 特に、<a>position: fixed</a>と<a>z-index</a>を用いて、
+                    他のコンテンツの上に固定表示させる仕組みが重要です。 
+                    また、vh単位を使うことで、画面サイズに応じた柔軟な高さ設定が可能になっています。
+                </p>
+            </div>
+
+        </div>
+
+
+        <h2 class="section-title">DOM操作：②レターボックスを追加しよう！</h2>
+        <div class="text-content">
+            <p>映画のような演出をWebに取り入れてみましょう！
+            レターボックスとは、画面の上下に黒い帯を表示することで、映像にシネマティックな印象を与える手法です。
+            これをローディング画面に応用することで、ユーザーに「特別な体験が始まる」という期待感を演出できます。<br>
+            このセクションでは、JavaScriptを使って画面の上下に黒い帯（レターボックス）を動的に追加する方法を紹介します。
+            DOM操作によって、読み込み中の画面に映画のような雰囲気を加えることができます。</p>
+
+            <div class="script">
+                <h3>letterbox.js</h3>
+                <pre class="line-numbers"><code class="language-javascript">// レターボックス上部用のdivを作成
+const letterboxTop = document.createElement('div');
+letterboxTop.classList.add('letterbox-top');
+// 黒い四角を表示するためのスタイルを直接適用
+letterboxTop.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+letterboxTop.style.position = 'fixed';
+letterboxTop.style.left = '0';
+letterboxTop.style.width = '100%';
+letterboxTop.style.height = '10vh'; // 画面の高さの"10"%
+letterboxTop.style.top = '0';
+letterboxTop.style.zIndex = '1000'; // 他の要素より手前に表示(オーバーレイより上)
+
+// レターボックス下部用のdivを作成
+const letterboxBottom = document.createElement('div');
+letterboxBottom.classList.add('letterbox-bottom');
+// 黒い四角を表示するためのスタイルを直接適用
+letterboxBottom.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+letterboxBottom.style.position = 'fixed';
+letterboxBottom.style.left = '0';
+letterboxBottom.style.width = '100%';
+letterboxBottom.style.height = '15vh'; // 画面の高さの"15"%
+letterboxBottom.style.bottom = '0';
+letterboxBottom.style.zIndex = '1000'; // 他の要素より手前に表示(オーバーレイより上)
+
+// レターボックスの要素をbodyに追加
+document.body.prepend(letterboxTop);
+document.body.append(letterboxBottom);</code></pre>
+
+            <form id="push_demo_2">
+                <button type="submit" class="btn btn-border">
+                    <span><strong>ローディングを体験！</strong></span>
+                </button>
+            </form>
+            </div>
+
+            <p>
+                まず、<a>const letterboxTop = document.createElement('div'); </a>の行では、 HTMLの div 要素が新しく作成され、
+                それが letterboxTop という名前の定数に格納されます。 
+                この要素は、画面の上部に黒い帯を表示するためのレターボックスとして機能します。
+            </p>
+            <P>
+                次に、<a>letterboxTop.classList.add('letterbox-top'); </a>によって、 この 
+                div 要素に<a>letterbox-top </a> というCSSクラスが追加されます。 
+                このクラスは、スタイルの適用や要素の識別に使用されます。
+            </P>
+            <p>
+                その後、<a>letterboxTop.style</a> を使って、背景色や位置、サイズなどのスタイルを直接設定しています。 
+                特に<a> position: fixed </a>によって、スクロールしても常に画面上部に表示されるようになっています。
+            </p>
+            <p>
+                同様に、<a>const letterboxBottom = document.createElement('div');</a> によって、 下部用のレターボックス要素が作成され、<a>letterbox-bottom</a> クラスが追加されます。
+                <a>bottom: 0</a> によって画面の下端に固定表示され、<a>height: 15vh</a> によって高さが画面の15%に設定されています。
+            </p>
+            <p>
+                最後に、<a>document.body.prepend(letterboxTop); と document.body.append(letterboxBottom); </a>によって、 
+                それぞれのレターボックス要素がHTMLの<a> body </a>に追加され、画面の上下に黒い帯が表示されるようになります。
+            </p>
+
+
+            <div class="box27">
+                <span class="box-title">ポイント</span>
+                <p>ここでのポイントは、JavaScriptによるDOM操作で、画面の上下に黒い帯（レターボックス）を動的に生成し、 
+                    映画のような演出をWeb上で再現している点です。 特に、<a>position: fixed</a>と<a>z-index</a>を用いて、
+                    他のコンテンツの上に固定表示させる仕組みが重要です。 
+                    また、vh単位を使うことで、画面サイズに応じた柔軟な高さ設定が可能になっています。
+                </p>
+            </div>
+
+        </div>
 
         <div class="script">
             <h3>JavaScript</h3>
@@ -194,6 +354,7 @@ greet('World');</code></pre>
     </footer>
 
     <script src="overlay.js"></script>
+    <script src="letterbox.js"></script>
     <script src="4.js"></script>
 </body>
 </html>

@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 5000);
         });
     } else {
-        console.log("4.js: 'searchForm' 要素が見つかりませんでした。");
+        console.log("overlay.js: 'searchForm' 要素が見つかりませんでした。");
     }
 });
