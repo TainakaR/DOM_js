@@ -250,45 +250,54 @@ document.body.append(letterboxBottom);</code></pre>
         </div>
 
 
-        <h2 class="section-title">DOM操作：②レターボックスを追加しよう！</h2>
+        <h2 class="section-title">DOM操作：③ローディングアニメーションを追加しよう！</h2>
         <div class="text-content">
-            <p>映画のような演出をWebに取り入れてみましょう！
-            レターボックスとは、画面の上下に黒い帯を表示することで、映像にシネマティックな印象を与える手法です。
-            これをローディング画面に応用することで、ユーザーに「特別な体験が始まる」という期待感を演出できます。<br>
-            このセクションでは、JavaScriptを使って画面の上下に黒い帯（レターボックス）を動的に追加する方法を紹介します。
-            DOM操作によって、読み込み中の画面に映画のような雰囲気を加えることができます。</p>
+            <p>ローディング中の待ち時間を、ただの静止画ではなく動きのあるアニメーションで演出してみましょう。
+                このセクションでは、JavaScriptを使って複数の画像を切り替えることで、
+                アニメーションのような効果を実現する方法を紹介します。<br>
+                画像を一定間隔で切り替えることで、ユーザーに「処理が進行中である」という視覚的なフィードバックを与え、待ち時間のストレスを軽減できます。
+                また、画像の切り替えはsetInterval()を使って簡単に実装できるため、初心者にもおすすめのテクニックです。
+            </p>
 
             <div class="script">
-                <h3>letterbox.js</h3>
-                <pre class="line-numbers"><code class="language-javascript">// レターボックス上部用のdivを作成
-const letterboxTop = document.createElement('div');
-letterboxTop.classList.add('letterbox-top');
-// 黒い四角を表示するためのスタイルを直接適用
-letterboxTop.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-letterboxTop.style.position = 'fixed';
-letterboxTop.style.left = '0';
-letterboxTop.style.width = '100%';
-letterboxTop.style.height = '10vh'; // 画面の高さの"10"%
-letterboxTop.style.top = '0';
-letterboxTop.style.zIndex = '1000'; // 他の要素より手前に表示(オーバーレイより上)
+                <h3>loading.js</h3>
+                <pre class="line-numbers"><code class="language-javascript">// 画像表示用のdivを作成
+const loadingImageContainer = document.createElement('div');
+loadingImageContainer.classList.add('loading-image-container');
+loadingImageContainer.style.position = 'fixed';
+loadingImageContainer.style.right = '0px'; // 右からの位置
+loadingImageContainer.style.bottom = '0px'; // 下からの位置
+loadingImageContainer.style.zIndex = '1001'; // レターボックスより手前に表示
 
-// レターボックス下部用のdivを作成
-const letterboxBottom = document.createElement('div');
-letterboxBottom.classList.add('letterbox-bottom');
-// 黒い四角を表示するためのスタイルを直接適用
-letterboxBottom.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-letterboxBottom.style.position = 'fixed';
-letterboxBottom.style.left = '0';
-letterboxBottom.style.width = '100%';
-letterboxBottom.style.height = '15vh'; // 画面の高さの"15"%
-letterboxBottom.style.bottom = '0';
-letterboxBottom.style.zIndex = '1000'; // 他の要素より手前に表示(オーバーレイより上)
+const loadingImage = document.createElement('img');
+loadingImage.style.height = '15vh'; // 画面の高さの15%
+loadingImage.style.width = 'auto'; // 比率を保持
 
-// レターボックスの要素をbodyに追加
-document.body.prepend(letterboxTop);
-document.body.append(letterboxBottom);</code></pre>
+loadingImageContainer.appendChild(loadingImage);
+document.body.appendChild(loadingImageContainer);
 
-            <form id="push_demo_2">
+// 画像の配列
+const images = [
+    'loading1.png',
+    'loading2.png',
+    'loading3.png',
+    'loading4.png'
+];
+let currentIndex = 0;
+
+// 画像を切り替える関数
+function changeImage() {
+    loadingImage.src = images[currentIndex];
+    currentIndex = (currentIndex + 1) % images.length;
+}
+
+// 初回表示
+changeImage();
+
+// 0.5秒ごとに画像を切り替えるインターバルを設定
+const intervalId = setInterval(changeImage, 500);</code></pre>
+
+            <form id="push_demo_3">
                 <button type="submit" class="btn btn-border">
                     <span><strong>ローディングを体験！</strong></span>
                 </button>
@@ -296,65 +305,42 @@ document.body.append(letterboxBottom);</code></pre>
             </div>
 
             <p>
-                まず、<a>const letterboxTop = document.createElement('div'); </a>の行では、 HTMLの div 要素が新しく作成され、
-                それが letterboxTop という名前の定数に格納されます。 
-                この要素は、画面の上部に黒い帯を表示するためのレターボックスとして機能します。
+                まず、<a>const loadingImageContainer = document.createElement('div'); </a>の行では、 
+                画像を表示するための div 要素が作成され、それが <a>loadingImageContainer</a> という定数に格納されます。 
+                この要素は、画面の右下に固定表示されるようにスタイルが設定されます。
             </p>
             <P>
-                次に、<a>letterboxTop.classList.add('letterbox-top'); </a>によって、 この 
-                div 要素に<a>letterbox-top </a> というCSSクラスが追加されます。 
-                このクラスは、スタイルの適用や要素の識別に使用されます。
+                次に、<a>const loadingImage = document.createElement('img'); </a>によって、 
+                実際に表示される画像要素が作成され、<a>loadingImageContainer </a>に追加されます。 <br>
+                ここでは、画像の高さが画面の15%に設定され、幅が <a>height: 15vh</a> によって、画面サイズに応じた高さが設定されます。
             </P>
             <p>
-                その後、<a>letterboxTop.style</a> を使って、背景色や位置、サイズなどのスタイルを直接設定しています。 
-                特に<a> position: fixed </a>によって、スクロールしても常に画面上部に表示されるようになっています。
+                <a>const images = ['loading1.png', 'loading2.png', ...];</a> のように、 
+                複数の画像ファイル名を配列として定義し、<a>currentIndex</a> を使って順番に表示します。
             </p>
             <p>
-                同様に、<a>const letterboxBottom = document.createElement('div');</a> によって、 下部用のレターボックス要素が作成され、<a>letterbox-bottom</a> クラスが追加されます。
-                <a>bottom: 0</a> によって画面の下端に固定表示され、<a>height: 15vh</a> によって高さが画面の15%に設定されています。
+                <a>function changeImage()</a> では、現在の画像を表示し、インデックスを更新する処理が行われます。 
+                <a>setInterval(changeImage, 500);</a> によって、0.5秒ごとに画像が切り替わるアニメーションが実現されます。
             </p>
-            <p>
-                最後に、<a>document.body.prepend(letterboxTop); と document.body.append(letterboxBottom); </a>によって、 
-                それぞれのレターボックス要素がHTMLの<a> body </a>に追加され、画面の上下に黒い帯が表示されるようになります。
-            </p>
-
 
             <div class="box27">
                 <span class="box-title">ポイント</span>
-                <p>ここでのポイントは、JavaScriptによるDOM操作で、画面の上下に黒い帯（レターボックス）を動的に生成し、 
-                    映画のような演出をWeb上で再現している点です。 特に、<a>position: fixed</a>と<a>z-index</a>を用いて、
-                    他のコンテンツの上に固定表示させる仕組みが重要です。 
-                    また、vh単位を使うことで、画面サイズに応じた柔軟な高さ設定が可能になっています。
+                <p>
+                    ここでのポイントは、JavaScriptによるDOM操作とタイマー関数<a>setInterval()</a>を組み合わせて、 
+                    複数の画像を切り替えることでアニメーション効果を実現している点です。 特に、画像の配列とインデックス管理を使って、
+                    簡単に動的なローディング演出が可能になります。 
+                    また、<a>position: fixedとz-index</a>を使うことで、画面の右下に常に表示されるように工夫されています。
                 </p>
             </div>
 
         </div>
 
-        <div class="script">
-            <h3>JavaScript</h3>
-            <pre class="line-numbers"><code class="language-javascript">function greet(name) {
-    console.log('Hello, ' + name + '!');
-}
-// 関数を呼び出す
-greet('World');</code></pre>
-        </div>
-
-        <form id="push_demo_4">
-            <button type="submit" class="btn btn--cubic btn-orange-shadow"><strong>ロード開始！</strong></button>
-        </form>
-
-        <div class="box27">
-            <span class="box-title">ここにタイトル</span>
-            <p>ここに文章</p>
-        </div>
-    </main>
-
     <footer class="site-footer">
-        <p>&copy; 2025 JS Loading Animation Design. All rights reserved.</p>
+        <p>&copy; 作成時間：15時間</p>
     </footer>
 
     <script src="overlay.js"></script>
     <script src="letterbox.js"></script>
-    <script src="4.js"></script>
+    <script src="loading.js"></script>
 </body>
 </html>

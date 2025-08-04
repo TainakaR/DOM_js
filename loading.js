@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // フォーム要素を取得
-    const searchForm = document.getElementById("push_demo_4");
+    const searchForm = document.getElementById("push_demo_3");
 
     if (searchForm) {
         // フォームのsubmitイベントを監視
@@ -91,10 +91,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 letterboxBottom.remove(); // レターボックス下部を削除
                 whiteOverlay.remove(); // 白いスクリーンを削除
                 loadingImageContainer.remove(); // ローディング画像コンテナを削除
-                console.log("test.js: 5秒が経過し、要素が削除されました。");
+                console.log("loading.js: 5秒が経過し、要素が削除されました。");
             }, 5000);
         });
     } else {
-        console.log("4.js: 'searchForm' 要素が見つかりませんでした。");
+        console.log("loading.js: 'searchForm' 要素が見つかりませんでした。");
     }
 });

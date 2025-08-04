@@ -245,14 +245,14 @@ code {
   display: flex; /* Flexboxコンテナにする */
   justify-content: center; /* 主軸（横方向）で子要素を中央に配置 */
   align-items: center; /* 交差軸（縦方向）で子要素を中央に配置（必要であれば） */
-  /* min-height: 100vh; */ /* 画面全体で中央に配置したい場合は、ビューポートの高さを使う */
+  padding: 0.5em 0; /* ボタンの上下に余白を持たせる */
 }
 
-#push_demo_4 {
+#push_demo_3 {
   display: flex; /* Flexboxコンテナにする */
   justify-content: center; /* 主軸（横方向）で子要素を中央に配置 */
   align-items: center; /* 交差軸（縦方向）で子要素を中央に配置（必要であれば） */
-  /* min-height: 100vh; */ /* 画面全体で中央に配置したい場合は、ビューポートの高さを使う */
+  padding: 0.5em 0; /* ボタンの上下に余白を持たせる */
 }
 
 /* コードブロックのコンテナ */
