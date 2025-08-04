@@ -357,3 +357,20 @@ code {
     margin: 0; 
     padding: 0;
 }
+
+/* ▼▼▼ 2x2 画像グリッド用のCSS ▼▼▼ */
+.image-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2つの列を均等な幅で作成 */
+    gap: 15px; /* 画像間の隙間 */
+    margin-top: 20px; /* 上の要素との余白 */
+}
+
+.image-grid-container img {
+    background-color: #000000;
+    width: 100%; /* コンテナの幅に合わせて画像を満たす */
+    height: auto; /* 画像の縦横比を維持 */
+    display: block; /* 画像の下にできる不要な余白を削除 */
+    border-radius: 8px; /* 画像の角を少し丸くする */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 画像に影を付けて立体感を出す */
+}
